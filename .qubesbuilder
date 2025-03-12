@@ -1,0 +1,9 @@
+host:
+  rpm:
+    create-archive: false
+    build:
+    - dummy.spec
+    source:
+      commands:
+      - 'cp @DEPENDENCIES_DIR@/components/@COMPONENT@/@VERREL@/vm-fc40/build/some.exe @BUILDER_DIR@/@COMPONENT@/'
+      - 'cp @DEPENDENCIES_DIR@/components/@COMPONENT@/@VERREL@/vm-fc41/build/another.exe @BUILDER_DIR@/@COMPONENT@/'

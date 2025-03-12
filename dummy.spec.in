@@ -1,0 +1,35 @@
+Name:	    qubes-windows-tools
+Version:	@VERSION@
+Release:	@REL@%{dist}
+Summary:	Dummy
+License:    GPL
+BuildRequires: genisoimage
+BuildArch:  noarch
+Source0:    some.exe
+Source1:    another.exe
+
+%prep
+%setup -c -T
+
+%description
+Dummy
+
+%build
+
+mkdir -p iso-content
+cp %{SOURCE0} iso-content/qubes-tools-win10-%{version}-@REL@.exe
+cp %{SOURCE1} iso-content/qubes-tools-win11-%{version}-@REL@.exe
+
+genisoimage -o qubes-windows-tools-%{version}-%{release}.iso -m .gitignore -JR iso-content
+
+%install
+mkdir -p $RPM_BUILD_ROOT/usr/lib/qubes/
+cp qubes-windows-tools-%{version}-%{release}.iso $RPM_BUILD_ROOT/usr/lib/qubes/
+ln -s qubes-windows-tools-%{version}-%{release}.iso $RPM_BUILD_ROOT/usr/lib/qubes/qubes-windows-tools.iso
+
+%files
+/usr/lib/qubes/qubes-windows-tools-%{version}-%{release}.iso
+/usr/lib/qubes/qubes-windows-tools.iso
+
+%changelog
+@CHANGELOG@
